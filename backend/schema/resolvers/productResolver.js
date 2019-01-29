@@ -94,6 +94,15 @@ export default {
             } catch (err) {
                 return false
             }
+        },
+        updateProduct: async (_,{
+            id,
+            product_name,
+            price,
+            colors,
+            sizes
+        }, { db }) => {
+            
         }
     }
 }
