@@ -12,6 +12,16 @@ export default {
             } catch (err) {
                 return null
             }
+        },
+        footwearAgeGender: async (_,{
+            sub_category,
+            selection
+        }, { db }) => {
+            try {
+                return await db.any(queries.selectFootwearByAgeGender,[sub_category.toLowerCase(), selection])
+            } catch (err) {
+                return err
+            }
         }
     }
 }

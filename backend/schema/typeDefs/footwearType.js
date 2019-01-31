@@ -1,6 +1,8 @@
-import { gql } from 'apollo-server-express'
+import {
+    gql
+} from 'apollo-server-express'
 
-export default gql`
+export default gql `
     type Footwear implements Node {
         id: ID!
         product_id: Int!
@@ -10,5 +12,6 @@ export default gql`
 
     extend type Query {
         allFootwearBySubCategory(sub_category: SubCategory!): [Node]
+        footwearAgeGender(sub_category: SubCategory! selection: String!): [AdvancedProduct!]!
     }
 `

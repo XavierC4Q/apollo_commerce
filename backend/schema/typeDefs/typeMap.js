@@ -16,18 +16,11 @@ export default gql `
     ACCESSORY
     }
 
-    enum Sleeve {
-    SHORT
-    LONG
-    NONE
-    }
-
     enum SubCategory {
     SWEATSHIRT
     SHIRT
     TANK_TOP
     DRESS_SHIRT
-    CASUAL
     SNEAKERS
     BOOTS
     DRESS_SHOE
