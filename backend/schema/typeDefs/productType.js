@@ -11,6 +11,8 @@ export default gql`
         findProduct(id: ID!): Node
         productByCategory(category: ProductCategory!): [Node]
         allProducts: [Node]
+        advancedSearch(category: ProductCategory! sub_category: SubCategory!): [AdvancedProduct]
+        advancedInfo(id: ID!): AdvancedProduct
     }
 
     extend type Mutation {

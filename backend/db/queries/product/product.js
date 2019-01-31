@@ -3,6 +3,26 @@ SELECT *
 FROM products
 WHERE id = $1
 `
+
+const advancedProductInfo = `
+SELECT p.product_name, price, colors, sizes, p.id
+FROM products AS p
+JOIN prices ON prices.product_id = p.id
+JOIN product_colors AS pc ON pc.product_id = prices.product_id
+JOIN product_sizes AS ps ON ps.product_id = pc.product_id
+WHERE ps.product_id = $1
+`
+
+const advancedSearch = `
+SELECT p.product_name, price, colors, sizes, p.id
+FROM products AS p
+JOIN prices ON prices.product_id = p.id
+JOIN product_colors AS pc ON pc.product_id = prices.product_id
+JOIN product_sizes AS ps ON ps.product_id = pc.product_id
+JOIN $1~ AS cat ON cat.product_id = pc.product_id
+WHERE cat.sub_category = $2
+`
+
 const productByCategory = `
 SELECT *
 FROM products
@@ -108,5 +128,7 @@ export {
     updateProduct,
     updatePrice,
     updateColors,
-    updateSizes
+    updateSizes,
+    advancedSearch,
+    advancedProductInfo
 }

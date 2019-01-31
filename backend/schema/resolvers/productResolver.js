@@ -32,6 +32,31 @@ export default {
             } catch (err) {
                 return null
             }
+        },
+        advancedSearch: async (_,{
+            category,
+            sub_category
+        }, {
+            db
+        }) => {
+            try {
+                return await db.any(queries.advancedSearch, [
+                    category.toLowerCase(), 
+                    sub_category])
+            } catch(err) {
+                return null
+            }
+        },
+        advancedInfo: async (_,{
+            id
+        }, {
+            db
+        }) => {
+            try {
+                return await db.one(queries.advancedProductInfo, [id])
+            } catch(err) {
+                return null
+            }
         }
     },
     Mutation: {
