@@ -67,6 +67,30 @@ DELETE FROM product_sizes
 WHERE product_id = $1
 `
 
+const updateProduct = `
+UPDATE products
+SET product_name = $1
+WHERE id = $2
+`
+
+const updatePrice = `
+UPDATE prices
+SET price = $1
+WHERE product_id = $2
+`
+
+const updateSizes = `
+UPDATE product_sizes
+SET sizes = $1
+WHERE product_id = $2
+`
+
+const updateColors = `
+UPDATE product_colors
+SET colors = $1
+WHERE product_id = $2
+`
+
 export {
     findProduct,
     productByCategory,
@@ -80,5 +104,9 @@ export {
     removeProduct,
     removePrice,
     removeColors,
-    removeSizes
+    removeSizes,
+    updateProduct,
+    updatePrice,
+    updateColors,
+    updateSizes
 }

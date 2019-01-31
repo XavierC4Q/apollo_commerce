@@ -50,7 +50,6 @@ export default {
 
                 return true
             } catch (err) {
-                console.log(err)
                 return false
             }
         },
@@ -102,7 +101,24 @@ export default {
             colors,
             sizes
         }, { db }) => {
-            
+            try {
+                if(product_name){
+                    await db.none(queries.updateProduct, [product_name, id])
+                }
+                if(price !== undefined){
+                    await db.none(queries.updatePrice, [price, id])
+                }
+                if(colors && colors.length){
+                    await db.none(queries.updateColors, [colors, id])
+                }
+                if(sizes && sizes.length){
+                    await db.none(queries.updateSizes, [sizes, id])
+                }
+
+                return true
+            } catch(err) {
+                return false
+            }
         }
     }
 }
