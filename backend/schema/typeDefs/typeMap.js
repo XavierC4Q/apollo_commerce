@@ -8,6 +8,19 @@ export default gql `
         product_name: String!
     }
 
+    enum AgeGender {
+        male
+        female
+        child
+    }
+
+    enum Fit {
+        SKINNY
+        STRAIGHT_FIT
+        RELAXED
+        SUPER_SKINNY
+    }
+
     enum ProductCategory {
     FOOTWEAR
     TOPS
@@ -24,6 +37,10 @@ export default gql `
     SNEAKERS
     BOOTS
     DRESS_SHOE
+    JEANS
+    PANTS
+    JOGGERS_SWEATPANTS
+    SHORTS
     }
 
     type Query {

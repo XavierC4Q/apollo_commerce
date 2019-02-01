@@ -10,6 +10,6 @@ export default gql`
 
     extend type Query {
         allTopsBySubCategory(sub_category: SubCategory!): [Node]
-        topsAgeGender(sub_category: SubCategory! selection: String!): [AdvancedProduct!]!
+        topsAgeGender(sub_category: SubCategory! selection: AgeGender!): [AdvancedProduct!]!
     }
 `

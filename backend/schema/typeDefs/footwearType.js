@@ -12,6 +12,6 @@ export default gql `
 
     extend type Query {
         allFootwearBySubCategory(sub_category: SubCategory!): [Node]
-        footwearAgeGender(sub_category: SubCategory! selection: String!): [AdvancedProduct!]!
+        footwearAgeGender(sub_category: SubCategory! selection: AgeGender!): [AdvancedProduct!]!
     }
 `

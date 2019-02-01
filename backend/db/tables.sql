@@ -32,6 +32,14 @@ CREATE TABLE tops (
     sub_category TEXT NOT NULL
 );
 
+CREATE TABLE bottoms (
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER REFERENCES products (id) UNIQUE,
+    product_name TEXT REFERENCES products (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
+    sub_category TEXT NOT NULL,
+    fit TEXT NOT NULL
+);
+
 --- PRODUCT SUB CATEGORIES
 
 CREATE TABLE sneakers (
@@ -92,6 +100,42 @@ CREATE TABLE dress_shirt (
     id SERIAL PRIMARY KEY,
     product_name TEXT REFERENCES tops (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
     product_id INTEGER REFERENCES tops (product_id),
+    male BOOLEAN NOT NULL,
+    female BOOLEAN NOT NULL,
+    child BOOLEAN NOT NULL
+);
+
+CREATE TABLE joggers_sweatpants (
+    id SERIAL PRIMARY KEY,
+    product_name TEXT REFERENCES bottoms (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
+    product_id INTEGER REFERENCES bottoms (product_id),
+    male BOOLEAN NOT NULL,
+    female BOOLEAN NOT NULL,
+    child BOOLEAN NOT NULL
+);
+
+CREATE TABLE jeans (
+    id SERIAL PRIMARY KEY,
+    product_name TEXT REFERENCES bottoms (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
+    product_id INTEGER REFERENCES bottoms (product_id),
+    male BOOLEAN NOT NULL,
+    female BOOLEAN NOT NULL,
+    child BOOLEAN NOT NULL
+);
+
+CREATE TABLE shorts (
+    id SERIAL PRIMARY KEY,
+    product_name TEXT REFERENCES bottoms (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
+    product_id INTEGER REFERENCES bottoms (product_id),
+    male BOOLEAN NOT NULL,
+    female BOOLEAN NOT NULL,
+    child BOOLEAN NOT NULL
+);
+
+CREATE TABLE pants (
+    id SERIAL PRIMARY KEY,
+    product_name TEXT REFERENCES bottoms (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
+    product_id INTEGER REFERENCES bottoms (product_id),
     male BOOLEAN NOT NULL,
     female BOOLEAN NOT NULL,
     child BOOLEAN NOT NULL
@@ -358,3 +402,28 @@ VALUES
 INSERT INTO sweatshirt (product_name, product_id, male, female, child)
 VALUES
 ('Christmas Sweater', 14, true, false, false);
+
+INSERT INTO bottoms (product_name, product_id, sub_category, fit)
+VALUES 
+('Black Ripped Jeans', 3, 'JEANS', 'SKINNY'),
+('Camo Joggers', 9, 'JOGGERS_SWEATPANTS', 'RELAXED'),
+('Beach Shorts', 13, 'SHORTS', 'RELAXED'),
+('Purple Slacks', 19, 'PANTS', 'STRAIGHT_FIT'),
+('Skinny Biker Jeans', 24, 'JEANS', 'SKINNY');
+
+INSERT INTO jeans (product_name, product_id, male, female, child)
+VALUES
+('Black Ripped Jeans', 3, true, false, false),
+('Skinny Biker Jeans', 24, true, false, false);
+
+INSERT INTO joggers_sweatpants (product_name, product_id, male, female, child)
+VALUES
+('Camo Joggers', 9, false, true, false);
+
+INSERT INTO shorts (product_name, product_id, male, female, child)
+VALUES
+('Beach Shorts', 13, false, false, true);
+
+INSERT INTO pants (product_name, product_id, male, female, child)
+VALUES
+('Purple Slacks', 19, true, true, false);
