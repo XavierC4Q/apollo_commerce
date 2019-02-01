@@ -41,7 +41,7 @@ export default {
                     expiresIn: "1d"
                 });
             }
-            return "INVALID USERNAME OR PASSWORD";
+            return "";
         },
         register: async (_, {
             username,
@@ -59,7 +59,7 @@ export default {
                     expiresIn: "1y"
                 });
             } catch (err) {
-                return "Username or email is taken";
+                return "";
             }
         },
         editUser: async (_, {
