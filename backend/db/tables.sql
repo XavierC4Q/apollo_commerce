@@ -40,6 +40,14 @@ CREATE TABLE bottoms (
     fit TEXT NOT NULL
 );
 
+CREATE TABLE outerwear (
+    id SERIAL PRIMARY KEY,
+    product_id INTEGER REFERENCES products (id) UNIQUE,
+    product_name TEXT REFERENCES products (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
+    sub_category TEXT NOT NULL,
+    waterproof BOOLEAN NOT NULL
+);
+
 --- PRODUCT SUB CATEGORIES
 
 CREATE TABLE sneakers (
@@ -136,6 +144,33 @@ CREATE TABLE pants (
     id SERIAL PRIMARY KEY,
     product_name TEXT REFERENCES bottoms (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
     product_id INTEGER REFERENCES bottoms (product_id),
+    male BOOLEAN NOT NULL,
+    female BOOLEAN NOT NULL,
+    child BOOLEAN NOT NULL
+);
+
+CREATE TABLE jackets (
+    id SERIAL PRIMARY KEY,
+    product_name TEXT REFERENCES outerwear (product_name) DEFERRABLE IMMEDIATE UNIQUE,
+    product_id INTEGER REFERENCES outerwear (product_id),
+    male BOOLEAN NOT NULL,
+    female BOOLEAN NOT NULL,
+    child BOOLEAN NOT NULL
+);
+
+CREATE TABLE hoodies (
+    id SERIAL PRIMARY KEY,
+    product_name TEXT REFERENCES outerwear (product_name) DEFERRABLE IMMEDIATE UNIQUE,
+    product_id INTEGER REFERENCES outerwear (product_id),
+    male BOOLEAN NOT NULL,
+    female BOOLEAN NOT NULL,
+    child BOOLEAN NOT NULL
+);
+
+CREATE TABLE coats (
+    id SERIAL PRIMARY KEY,
+    product_name TEXT REFERENCES outerwear (product_name) DEFERRABLE IMMEDIATE UNIQUE,
+    product_id INTEGER REFERENCES outerwear (product_id),
     male BOOLEAN NOT NULL,
     female BOOLEAN NOT NULL,
     child BOOLEAN NOT NULL
@@ -427,3 +462,17 @@ VALUES
 INSERT INTO pants (product_name, product_id, male, female, child)
 VALUES
 ('Purple Slacks', 19, true, true, false);
+
+INSERT INTO outerwear (product_name, product_id, sub_category, waterproof)
+VALUES 
+('Trenchcoat by Polo', 5, 'COATS', false),
+('Raincoat by Eazy', 10, 'COATS', true),
+('Puffy Coat', 15, 'COATS', true),
+('Bear Fur Coat', 22, 'COATS', false);
+
+INSERT INTO coats (product_name, product_id, male, female, child)
+VALUES 
+('Trenchcoat by Polo', 5, true, false, false),
+('Raincoat by Eazy', 10, false, true, false),
+('Puffy Coat', 15, true, false, false),
+('Bear Fur Coat', 22, false, false, true);
