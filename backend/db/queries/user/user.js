@@ -7,7 +7,7 @@ SELECT *
 FROM users 
 WHERE username = $1
 `
-const register = `
+const registerUser = `
 INSERT INTO users (username, password, email)
 VALUES ($1, $2, $3) 
 RETURNING id, username
@@ -21,6 +21,6 @@ WHERE id = $4
 export {
     allUsers,
     getUser,
-    register,
+    registerUser,
     editUser
 }

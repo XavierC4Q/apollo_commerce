@@ -47,7 +47,7 @@ export default {
             username,
             password,
             email
-        }) => {
+        }, { db }) => {
             try {
                 const newUser = await db.one(queries.registerUser, [
                     username,
