@@ -22,25 +22,28 @@ export default gql `
     }
 
     enum ProductCategory {
-    FOOTWEAR
-    TOPS
-    BOTTOMS
-    OUTERWEAR
-    ACCESSORY
+        FOOTWEAR
+        TOPS
+        BOTTOMS
+        OUTERWEAR
+        ACCESSORY
     }
 
     enum SubCategory {
-    SWEATSHIRT
-    SHIRT
-    TANK_TOP
-    DRESS_SHIRT
-    SNEAKERS
-    BOOTS
-    DRESS_SHOE
-    JEANS
-    PANTS
-    JOGGERS_SWEATPANTS
-    SHORTS
+        SWEATSHIRT
+        SHIRT
+        TANK_TOP
+        DRESS_SHIRT
+        SNEAKERS
+        BOOTS
+        DRESS_SHOE
+        JEANS
+        PANTS
+        JOGGERS_SWEATPANTS
+        SHORTS
+        JACKETS
+        COATS
+        HOODIES
     }
 
     type Query {

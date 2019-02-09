@@ -34,6 +34,8 @@ export default gql`
             child: Boolean!
             category: ProductCategory!
             subCategory: SubCategory!
+            fit: Fit
+            waterproof: Boolean
         ): Boolean!
     }
 `

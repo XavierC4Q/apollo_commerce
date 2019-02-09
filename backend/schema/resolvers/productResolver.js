@@ -33,7 +33,7 @@ export default {
                 return null
             }
         },
-        advancedSearch: async (_,{
+        advancedSearch: async (_, {
             category,
             sub_category
         }, {
@@ -41,20 +41,21 @@ export default {
         }) => {
             try {
                 return await db.any(queries.advancedSearch, [
-                    category.toLowerCase(), 
-                    sub_category])
-            } catch(err) {
+                    category.toLowerCase(),
+                    sub_category
+                ])
+            } catch (err) {
                 return null
             }
         },
-        advancedInfo: async (_,{
+        advancedInfo: async (_, {
             id
         }, {
             db
         }) => {
             try {
                 return await db.one(queries.advancedProductInfo, [id])
-            } catch(err) {
+            } catch (err) {
                 return null
             }
         }
@@ -87,7 +88,9 @@ export default {
             female,
             child,
             category,
-            subCategory
+            subCategory,
+            fit,
+            waterproof
         }, {
             db
         }) => {
@@ -98,9 +101,22 @@ export default {
                     category.toUpperCase()
                 ]).then(async newProduct => {
                     // INSERT INTO PRODUCT CATEGORY
-                    return await db.one(queries.insertProductCategory, [
-                        category.toLowerCase(), newProduct.id, product_name, subCategory.toUpperCase()
-                    ])
+                    if (fit) {
+                        // FOR BOTTOM PRODUCTS
+                        return await db.one(queries.insertBottoms, [
+                            newProduct.id, product_name, subCategory.toUpperCase(), fit.toUpperCase()
+                        ])
+                    } else if (waterproof !== undefined) {
+                        // FOR OUTERWEAR PRODUCTS
+                        return await db.one(queries.insertOuterwear, [
+                            newProduct.id, product_name, subCategory.toUpperCase(), waterproof
+                        ])
+                    } else {
+                        // FOR ALL OTHER KINDS OF PRODUCTS FOR NOW
+                        return await db.one(queries.insertProductCategory, [
+                            category.toLowerCase(), newProduct.id, product_name, subCategory.toUpperCase()
+                        ])
+                    }
                 }).then(async product => {
                     // INSERT INTO SUB CATEGORY
                     return await db.one(queries.insertProductSubCategory, [
@@ -119,29 +135,31 @@ export default {
                 return false
             }
         },
-        updateProduct: async (_,{
+        updateProduct: async (_, {
             id,
             product_name,
             price,
             colors,
             sizes
-        }, { db }) => {
+        }, {
+            db
+        }) => {
             try {
-                if(product_name){
+                if (product_name) {
                     await db.none(queries.updateProduct, [product_name, id])
                 }
-                if(price !== undefined){
+                if (price !== undefined) {
                     await db.none(queries.updatePrice, [price, id])
                 }
-                if(colors && colors.length){
+                if (colors && colors.length) {
                     await db.none(queries.updateColors, [colors, id])
                 }
-                if(sizes && sizes.length){
+                if (sizes && sizes.length) {
                     await db.none(queries.updateSizes, [sizes, id])
                 }
 
                 return true
-            } catch(err) {
+            } catch (err) {
                 return false
             }
         }

@@ -52,6 +52,18 @@ VALUES ($2, $3, $4, $5, $6)
 RETURNING product_id, product_name
 `
 
+const insertBottoms = `
+INSERT INTO bottoms (product_id, product_name, sub_category, fit)
+VALUES ($1, $2, $3, $4)
+RETURNING product_id, product_name
+`
+
+const insertOuterwear = `
+INSERT INTO outerwear (product_id, product_name, sub_category, waterproof)
+VALUES ($1, $2, $3, $4)
+RETURNING product_id, product_name
+`
+
 const insertIntoPrices = `
 INSERT INTO prices (product_id, price)
 VALUES($1, $2)
@@ -118,6 +130,8 @@ export {
     insertProduct,
     insertProductCategory,
     insertProductSubCategory,
+    insertBottoms,
+    insertOuterwear,
     insertIntoPrices,
     insertIntoProductColors,
     insertIntoProductSizes,
@@ -130,5 +144,5 @@ export {
     updateColors,
     updateSizes,
     advancedSearch,
-    advancedProductInfo
+    advancedProductInfo,
 }

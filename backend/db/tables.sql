@@ -151,7 +151,7 @@ CREATE TABLE pants (
 
 CREATE TABLE jackets (
     id SERIAL PRIMARY KEY,
-    product_name TEXT REFERENCES outerwear (product_name) DEFERRABLE IMMEDIATE UNIQUE,
+    product_name TEXT REFERENCES outerwear (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
     product_id INTEGER REFERENCES outerwear (product_id),
     male BOOLEAN NOT NULL,
     female BOOLEAN NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE jackets (
 
 CREATE TABLE hoodies (
     id SERIAL PRIMARY KEY,
-    product_name TEXT REFERENCES outerwear (product_name) DEFERRABLE IMMEDIATE UNIQUE,
+    product_name TEXT REFERENCES outerwear (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
     product_id INTEGER REFERENCES outerwear (product_id),
     male BOOLEAN NOT NULL,
     female BOOLEAN NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE hoodies (
 
 CREATE TABLE coats (
     id SERIAL PRIMARY KEY,
-    product_name TEXT REFERENCES outerwear (product_name) DEFERRABLE IMMEDIATE UNIQUE,
+    product_name TEXT REFERENCES outerwear (product_name) DEFERRABLE INITIALLY IMMEDIATE UNIQUE,
     product_id INTEGER REFERENCES outerwear (product_id),
     male BOOLEAN NOT NULL,
     female BOOLEAN NOT NULL,
