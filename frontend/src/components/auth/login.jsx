@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from 'react-router-dom'
 import { Mutation } from "react-apollo";
 
 import { LOGIN_USER } from "../../graphql/mutation/user/login";
@@ -16,6 +17,10 @@ export default class LoginComponent extends React.Component {
 
   render() {
     const { username, password, message } = this.state;
+    const loggedIn = localStorage.getItem('auth_token')
+    if(loggedIn){
+      return(<Redirect to='/' />)
+    }
     return (
       <Mutation mutation={LOGIN_USER}>
         {(login, { data }) => {
@@ -69,7 +74,6 @@ export default class LoginComponent extends React.Component {
                   onChange={this.handleChange}
                   placeholder="Your password"
                 />
-                {data && <p>{data.login}</p>}
                 <div>
                   <button type="submit">Submit</button>
                 </div>

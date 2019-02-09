@@ -13,7 +13,6 @@ import * as serviceWorker from './serviceWorker';
 const cache = new InMemoryCache()
 
 const authLink = new ApolloLink((operation, forward) => {
-    console.log('AUTH LINK')
     const token = localStorage.getItem('auth_token')
     console.log('AUTH TOKEN', token)
     operation.setContext({
@@ -28,7 +27,7 @@ const loggerLink = new ApolloLink((operation, forward) => {
     console.log(`EXCEUTING ${operation.operationName}`)
     return forward(operation).map(data => {
         console.log(`ENDING OPERATION ${operation.operationName}`)
-        console.log(JSON.stringify(data, null, 10))
+        console.log(JSON.stringify(data, null, 2))
         return data
     })
 })
