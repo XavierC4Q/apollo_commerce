@@ -34,6 +34,7 @@ export default class LoginComponent extends React.Component {
                   message: "Invalid credentials. Check username and password"
                 });
               } else {
+                localStorage.setItem("auth_token", data.login);
                 this.setState({
                   username: "",
                   password: "",
