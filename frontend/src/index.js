@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from 'react-apollo'
+import { withClientState } from 'apollo-link-state'
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-link'
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
+import { merge } from 'lodash'
+import authResolver from './graphql/resolvers/authResolver'
 import * as serviceWorker from './serviceWorker';
 
 const cache = new InMemoryCache()
@@ -36,9 +39,14 @@ const apiLink = new HttpLink({
     uri: 'http://localhost:3500/graphql'
 })
 
+const stateLink = withClientState({
+    cache,
+    ...merge(authResolver)
+})
+
 const client = new ApolloClient({
-    link: loggerLink.concat(authLink.concat(apiLink)),
-    cache: cache
+    link: stateLink.concat(loggerLink.concat(authLink.concat(apiLink))),
+    cache
 })
 
 
